@@ -1,0 +1,108 @@
+/* Esempi aggiuntivi per un look più futuristico in stili.css */
+
+:root {
+    /* Palette più "futuristica" */
+    --lp-primary-color: #00ffff; /* Ciano elettrico */
+    --lp-secondary-color: #ff00ff; /* Magenta */
+    --lp-accent-color: #ffff00;   /* Giallo neon */
+    --lp-text-color: #e0e0e0;     /* Grigio chiaro per testo */
+    --lp-text-light: #ffffff;     /* Bianco */
+    --lp-background-color: #1a1a1a; /* Sfondo quasi nero */
+    --lp-header-bg: rgba(30, 30, 40, 0.9); /* Sfondo scuro per header */
+    --lp-footer-bg: rgba(30, 30, 40, 0.9); /* Sfondo scuro per footer */
+    --lp-card-background: rgba(50, 50, 60, 0.7); /* Card scura e semi-trasparente */
+    --lp-border-color: rgba(0, 255, 255, 0.4); /* Bordo ciano trasparente */
+    --lp-box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); /* Ombra ciano */
+    --lp-btn-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Ombra ciano bottoni */
+    --lp-border-radius: 5px; /* Bordi meno arrotondati */
+}
+
+body {
+    font-family: 'Roboto Mono', monospace; /* Esempio di font tecnico */
+    background: #1a1a1a; /* Sfondo solido o gradiente con colori futuristici */
+    color: var(--lp-text-color);
+    /* Puoi usare un gradiente come: */
+    /* background: linear-gradient(135deg, #1a1a1a 0%, #3a003a 50%, #1a1a1a 100%); */
+}
+
+header {
+    background-color: var(--lp-header-bg);
+    color: var(--lp-header-text);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7); /* Ombra testo ciano */
+}
+
+nav ul li a {
+    background-color: rgba(0, 255, 255, 0.1); /* Sfondo bottone ciano trasparente */
+    border: 1px solid rgba(0, 255, 255, 0.5); /* Bordo ciano */
+    color: var(--lp-header-text);
+    box-shadow: var(--lp-btn-shadow);
+}
+
+nav ul li a:hover {
+    background-color: rgba(0, 255, 255, 0.3); /* Ciano più solido all'hover */
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Ombra ciano più intensa */
+}
+
+.card-custom {
+    background-color: var(--lp-card-background);
+    border: 1px solid var(--lp-border-color);
+    box-shadow: var(--lp-box-shadow);
+    border-radius: var(--lp-border-radius);
+}
+
+.card-custom:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6); /* Ombra ciano ancora più grande */
+}
+
+.card-title {
+    color: var(--lp-accent-color); /* Titolo arancione/giallo */
+}
+
+.card-text {
+    color: var(--lp-text-color); /* Testo corpo card */
+}
+
+.btn-primary {
+    background-color: var(--lp-primary-color) !important;
+    border-color: var(--lp-primary-color) !important;
+    box-shadow: var(--lp-btn-shadow);
+}
+.btn-primary:hover {
+     background-color: #00b3b3 !important;
+     border-color: #00b3b3 !important;
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+/* Adatta altri bottoni (success, warning) con i colori e ombre futuristici */
+
+
+footer {
+    background-color: var(--lp-footer-bg);
+    color: var(--lp-text-light);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+#install-section {
+    background-color: var(--lp-card-background);
+    border: 2px dashed var(--lp-border-color);
+    box-shadow: var(--lp-box-shadow);
+}
+/* Adatta pulsante submit installazione */
+#install-section input[type="submit"] {
+    background-color: var(--lp-secondary-color);
+    border-color: var(--lp-secondary-color);
+    box-shadow: var(--lp-btn-shadow);
+    color: white;
+}
+#install-section input[type="submit"]:hover {
+     background-color: #22b660;
+     border-color: #22b660;
+     box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+/* Stile testo piccolo nella sezione installazione */
+#install-section small {
+     color: var(--lp-text-light); /* Testo chiaro */
+     background-color: rgba(0,0,0,0.7); /* Sfondo scuro più solido */
+}

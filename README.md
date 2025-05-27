@@ -1,146 +1,62 @@
-# Documentazione Progetto quaderno_informatica_et - Database Film
+# Guida Avanzata alla Gestione del quaderno d'informatica
 
-## 🗄️ Configurazione Automatica del Database
+## L'utente prima di accedere al sito, deve premere il pulsante "Installa il database".
 
-### 1. Crea il Database e l'Utente
-Esegui queste query in phpMyAdmin (SQL tab) o in MySQL console:
+## 🗄️ Parte 1: Creazione di un Nuovo Database
 
-```sql
--- Crea il database
-CREATE DATABASE IF NOT EXISTS film_db 
-CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+### Passo 1: Aprire phpMyAdmin
+1. Avvia XAMPP e assicurati che Apache e MySQL siano in esecuzione
+2. Apri il browser e vai su: `http://localhost/phpmyadmin`
 
--- Crea l'utente dedicato (già creato all'interno del phpmyadmin personale)
-CREATE USER 'film_user'@'ciao' IDENTIFIED BY 'ElTaras;
+### Passo 2: Creare il Database
+1. Clicca su "Nuovo" nel menu di sinistra
+2. Nella sezione "Crea database":
+   - Nome database: inserisci un nome (es. `eventi_web`)
+   - Collazione: seleziona `utf8_general_ci`
+3. Clicca sul pulsante "Crea"
 
--- Assegna i privilegi
-GRANT ALL PRIVILEGES ON film_db.* TO 'film_user'@'ElTaras';
 
--- Applica i cambiamenti
-FLUSH PRIVILEGES;
-```
+## 📤 Parte 2: Importazione dei File SQL
 
-### 2. Struttura Completa delle Tabelle
-Esegui questa query per creare tutte le tabelle (copiata direttamente da film_db.sql):
+### Passo 1: Seleziona il Database
+1. Nel menu di sinistra, clicca sul nome del database appena creato
+2. Verrai portato alla dashboard del database
 
-```sql
-USE film_db;
+### Passo 2: Avvia l'Importazione
+1. Clicca sulla scheda "Importa" in alto
+2. Nella sezione "File da importare":
+   - Clicca "Sfoglia" e seleziona il file .sql (es. `eventi_web.sql`)
+3. Impostazioni importanti:
+   - Formato: SQL
+   - Codifica: utf-8
+4. Lascia tutte le altre opzioni predefinite
+5. Clicca "Esegui" in fondo alla pagina
 
-CREATE TABLE IF NOT EXISTS attore (
-  `Codice_Attore` int(11) NOT NULL,
-  `Nome` varchar(50) DEFAULT NULL,
-  `Cognome` varchar(50) DEFAULT NULL,
-  `Nazionalità` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS attori (
-  `Codice_Attore` int(11) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Cognome` varchar(50) NOT NULL,
-  `Data_Nascita` date NOT NULL,
-  `Nazionalità` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS film (
-  `Codice_Film` int(11) NOT NULL,
-  `Titolo` varchar(100) DEFAULT NULL,
-  `Anno_Produzione` int(11) DEFAULT NULL,
-  `Regista` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+## ✔️ Parte 3: Verifica dell'Importazione
 
-CREATE TABLE IF NOT EXISTS film_attore (
-  `Codice_Film` int(11) NOT NULL,
-  `Codice_Attore` int(11) NOT NULL,
-  `Ruolo` enum('Protagonista','Non Protagonista') DEFAULT NULL,
-  PRIMARY KEY (`Codice_Film`,`Codice_Attore`),
-  KEY `Codice_Attore` (`Codice_Attore`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+### Passo 1: Controlla le Tabelle
+1. Nel menu di sinistra, espandi il tuo database
+2. Dovresti vedere l'elenco delle tabelle create
+   - Per `eventi_web.sql`: dovresti vedere `utenti`, `eventi`, etc.
+   - Per `turismo.sql`: `luoghi`, `commenti`, etc.
 
-CREATE TABLE IF NOT EXISTS proiezione (
-  `Codice_Proiezione` int(11) NOT NULL,
-  `Città` varchar(100) DEFAULT NULL,
-  `Sala` varchar(50) DEFAULT NULL,
-  `Data` date DEFAULT NULL,
-  `Ora` time DEFAULT NULL,
-  `Numero_Spettatori` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+### Passo 2: Controlla i Dati
+1. Clicca su una tabella
+2. Vai alla scheda "Sfoglia"
+3. Verifica che i dati siano stati importati correttamente
 
-CREATE TABLE IF NOT EXISTS film_proiezione (
-  `Codice_Film` int(11) NOT NULL,
-  `Codice_Proiezione` int(11) NOT NULL,
-  PRIMARY KEY (`Codice_Film`,`Codice_Proiezione`),
-  KEY `Codice_Proiezione` (`Codice_Proiezione`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+## 🔧 Parte 4: Configurazione del File db.php
 
--- Aggiungi gli indici e i vincoli di chiave esterna
-ALTER TABLE `attore`
-  ADD PRIMARY KEY (`Codice_Attore`);
-
-ALTER TABLE `attori`
-  ADD PRIMARY KEY (`Codice_Attore`);
-
-ALTER TABLE `film`
-  ADD PRIMARY KEY (`Codice_Film`);
-
-ALTER TABLE `proiezione`
-  ADD PRIMARY KEY (`Codice_Proiezione`);
-
--- Aggiungi gli AUTO_INCREMENT
-ALTER TABLE `attore`
-  MODIFY `Codice_Attore` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `attori`
-  MODIFY `Codice_Attore` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `film`
-  MODIFY `Codice_Film` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `proiezione`
-  MODIFY `Codice_Proiezione` int(11) NOT NULL AUTO_INCREMENT;
-
--- Aggiungi i vincoli di chiave esterna
-ALTER TABLE `film_attore`
-  ADD CONSTRAINT `film_attore_ibfk_1` FOREIGN KEY (`Codice_Film`) REFERENCES `film` (`Codice_Film`),
-  ADD CONSTRAINT `film_attore_ibfk_2` FOREIGN KEY (`Codice_Attore`) REFERENCES `attore` (`Codice_Attore`);
-
-ALTER TABLE `film_proiezione`
-  ADD CONSTRAINT `film_proiezione_ibfk_1` FOREIGN KEY (`Codice_Film`) REFERENCES `film` (`Codice_Film`),
-  ADD CONSTRAINT `film_proiezione_ibfk_2` FOREIGN KEY (`Codice_Proiezione`) REFERENCES `proiezione` (`Codice_Proiezione`);
-```
-
-### 3. Popolamento Iniziale Completo
-Esegui queste query per inserire i dati di esempio presenti in film_db.sql:
-
-```sql
-USE film_db;
-
--- Dati per la tabella attori
-INSERT INTO `attori` (`Codice_Attore`, `Nome`, `Cognome`, `Data_Nascita`, `Nazionalità`) VALUES
-(1, 'ccc', 'ccc', '0222-02-22', NULL),
-(2, 'ccc', 'ccc', '2222-02-22', NULL),
-(3, 'CCCCCCCCC', 'CCCC', '0222-02-22', NULL),
-(4, 'CCCC', 'CCC', '2222-02-22', NULL),
-(124, 'Marino', 'Torsello', '2007-01-25', 'Italiana');
-
--- Dati per la tabella film
-INSERT INTO `film` (`Codice_Film`, `Titolo`, `Anno_Produzione`, `Regista`) VALUES
-(122, '122', 12344, 'io'),
-(123, 'ciao', 2025, 'torsello'),
-(124, 'ccc', 2025, 'Torx'),
-(125, 'ccc', 222, '222'),
-(126, 'ccc', 222, '222');
-```
-
-## 🔧 Configurazione del File db.php
-
-Modifica il file `db.php` con queste credenziali (aggiornate per usare l'utente creato):
+Ogni progetto ha un file `db.php` che va modificato con queste informazioni:
 
 ```php
 <?php
-$host = "localhost";
-$user = "ElTaras";
-$password = "ciao";
-$dbname = "film_db";
+$host = "localhost";    // Non cambiare
+$user = "ElTaras";         // Utente predefinito XAMPP
+$password = "ciao";         // Password (vuota in XAMPP)
+$dbname = "202425_5ib_ElTaras_nome_db";    // Sostituisci con il nome del database
 
 $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
@@ -149,31 +65,62 @@ if ($conn->connect_error) {
 ?>
 ```
 
-## 🚀 Avvio del Progetto
+### Il codice `install.php` ha utente root e password vuota per semplificare l'installazione del database a chiunque.
 
-1. Avvia XAMPP e assicurati che Apache e MySQL siano in esecuzione
-2. Apri il browser e vai su:
-   ```
-   http://localhost/trasferimento-quaderno-d-informatica-zAlessandro7/quaderno_informatica_et/
-   ```
+```php
+<?php
+$host = "localhost";    // Non cambiare
+$user = "root";         // Utente predefinito XAMPP
+$password = "";         // Password (vuota in XAMPP)
 
-## 🛠️ Struttura del Progetto
 
 ```
-quaderno_informatica_et/
-├── db.php               # Configurazione database
-├── film_db.sql          # Struttura database
-├── esercizio1.php       # Esercizio 1
-├── esercizio2.php       # Esercizio 2
-├── esercizio3.php       # Esercizio 3
-├── esercizio4.php       # Esercizio 4
-├── style.css            # Stile del progetto
-└── README.md            # Documentazione del progetto
-```
+## 🚨 Risoluzione Problemi Comuni
 
-## 🔍 Verifica del Funzionamento
+### Errore "#1044 - Accesso negato"
+- Soluzione: Assicurati di usare:
+  - Utente: `ElTaras`
+  - Password: `"ciao"` 
 
-1. Controlla che le tabelle siano state create correttamente in phpMyAdmin
-2. Verifica che i dati di esempio siano presenti nelle tabelle
-3. Accedi all'applicazione e controlla che i film e gli attori vengano visualizzati
-4. Prova a registrare un nuovo attore e verifica che venga inserito nel database
+### Errore "#1049 - Database sconosciuto"
+- Soluzione: Controlla di aver:
+  1. Creato il database
+  2. Scritto correttamente il nome in `db.php`
+
+### Errore durante l'importazione
+1. Verifica che il file SQL non sia corrotto
+2. Controlla che sia nel formato corretto (UTF-8)
+3. Prova a importare in parti più piccole
+
+## 💡 Consigli Avanzati
+
+1. **Backup Database**:
+   - In phpMyAdmin, seleziona il database
+   - Vai su "Esporta" > "Esportazione rapida" > "SQL"
+   - Clicca "Esegui" per scaricare il backup
+
+2. **Modificare i Privilegi**:
+   - Se necessario, in phpMyAdmin:
+     1. Vai su "Account utente"
+     2. Modifica i privilegi per `root@localhost`
+
+3. **Struttura Database**:
+   - Ogni file .sql contiene:
+     - `CREATE TABLE` - crea le tabelle
+     - `INSERT INTO` - popola i dati iniziali
+     - Relazioni tra tabelle (chiavi esterne)
+
+## 📚 Struttura dei Database Inclusi
+
+### 1. eventi_web.sql
+- Tabelle principali:
+  - `utenti` (id, username, password, email)
+  - `eventi` (id, titolo, descrizione, data, luogo)
+- Relazioni: eventi collegati agli utenti creatori
+
+### 2. turismo.sql
+- Tabelle:
+  - `luoghi` (id, nome, descrizione, immagine)
+  - `commenti` (id, testo, valutazione, id_utente)
+- Chiavi esterne: commenti collegati a luoghi e utenti
+

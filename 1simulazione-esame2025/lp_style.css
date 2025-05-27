@@ -1,0 +1,123 @@
+/* 1simulazione-esame2025/assets/css/lp_style.css */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+:root {
+    --lp-primary-color: #5DADE2; /* Blu chiaro */
+    --lp-secondary-color: #58D68D; /* Verde chiaro */
+    --lp-text-color: #34495E; /* Blu scuro/grigio */
+    --lp-background-color: #F4F6F6;
+    --lp-card-background: #FFFFFF;
+    --lp-header-bg: #2C3E50; /* Header più scuro */
+    --lp-header-text: #ECF0F1;
+    --lp-footer-background: #2C3E50;
+    --lp-success-color: #28a745;
+    --lp-error-color: #dc3545;
+    --lp-warning-color: #ffc107;
+    --lp-font-family: 'Nunito', sans-serif;
+}
+
+body {
+    font-family: var(--lp-font-family);
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+    background-color: var(--lp-background-color);
+    color: var(--lp-text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container { /* Bootstrap già lo definisce, ma possiamo sovrascrivere se necessario */
+    /* max-width: 1140px; */ /* Esempio se volessi una larghezza diversa da Bootstrap */
+}
+
+/* Header - Bootstrap navbar già fa molto, qui personalizzazioni */
+.navbar {
+    background-color: var(--lp-header-bg) !important; /* Forza il colore di sfondo */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.navbar-brand {
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    color: var(--lp-secondary-color) !important;
+}
+.nav-link {
+    color: var(--lp-header-text) !important;
+    font-weight: 500 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--lp-secondary-color) !important;
+}
+.dropdown-menu {
+    background-color: var(--lp-header-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.dropdown-item {
+    color: var(--lp-header-text) !important;
+}
+.dropdown-item:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: var(--lp-secondary-color) !important;
+}
+
+
+/* Main Content Area */
+.mt-4 { /* Bootstrap class, qui solo per riferimento */ }
+.page-content-lingue { /* Classe per il main container in header/footer */ }
+
+h1, h2.page-title {
+    color: var(--lp-primary-color);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+h2.page-title {
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Messaggi di Feedback (usano classi Bootstrap alert) */
+.alert {
+    font-weight: 500;
+}
+
+/* Form Styles (adattati per Bootstrap) */
+.form-styled { /* Aggiungi questa classe ai tuoi form */
+    background: var(--lp-card-background);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+.form-group { margin-bottom: 1.25rem; } /* Bootstrap usa mb-3, puoi usare quello */
+.form-group label { font-weight: 600; margin-bottom: 0.3rem; }
+.btn-submit { /* Se vuoi un pulsante custom oltre a btn-primary */
+    /* background-color: var(--lp-secondary-color); */
+    /* border-color: var(--lp-secondary-color); */
+    /* font-weight: 600; */
+}
+
+/* Card Corsi */
+.card.h-100 { /* Bootstrap class */ }
+.card-title { color: var(--lp-primary-color); font-weight: 600; }
+
+/* Footer */
+footer {
+   /* background-color: var(--lp-footer-background) !important; */ /* Già impostato inline */
+}
+footer p { margin-bottom: 0.25rem; }
+footer a { color: var(--lp-secondary-color); }
+footer a:hover { color: #fff; }
+
+.required { color: var(--lp-error-color); }
+
+/* Welcome section */
+.welcome-section { text-align: center; padding: 40px 20px; }
+.welcome-section h1.display-5 { color: var(--lp-primary-color); }
+.welcome-section .lead { font-size: 1.1rem; color: #555; }
+.cta-buttons .btn { margin: 0 8px; padding: 10px 22px; font-weight: 600; }
+.btn-primary { background-color: var(--lp-primary-color); border-color: var(--lp-primary-color); }
+.btn-primary:hover { background-color: #3a8dda; border-color: #3a8dda; }
+.btn-outline-secondary { border-color: var(--lp-secondary-color); color: var(--lp-secondary-color); }
+.btn-outline-secondary:hover { background-color: var(--lp-secondary-color); color:white; }

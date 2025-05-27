@@ -1,0 +1,122 @@
+/* Stile generale */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Navigazione */
+nav {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+/* Intestazioni */
+h1, h2 {
+    color: #007BFF;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Sezioni */
+section {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Pulsanti */
+button, input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Stile generale per il footer */
+footer {
+    background-color: #000; /* Sfondo nero */
+    color: #000; /* Testo nero (verrà cambiato solo per animazione) */
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden; /* Nasconde il testo fuori dal contenitore */
+}
+
+/* Contenitore della scritta scorrevole */
+footer .scrolling-text {
+    display: inline-block;
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    color: #fff; /* Testo bianco */
+    animation: scroll-left 10s linear infinite; /* Animazione */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Animazione per lo scorrimento */
+@keyframes scroll-left {
+    from {
+        transform: translateX(100%); /* Partenza fuori a destra */
+    }
+    to {
+        transform: translateX(-100%); /* Arrivo fuori a sinistra */
+    }
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Tabelle */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Link */
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
